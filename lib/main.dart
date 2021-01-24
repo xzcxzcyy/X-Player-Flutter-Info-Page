@@ -16,8 +16,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  static const platformChannelId = "banson.cloud/info";
-  static const platform = const MethodChannel(platformChannelId);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

@@ -9,21 +9,25 @@ import '../../main.dart';
 
 class InfoModel extends ChangeNotifier {
   VideoInfo _videoInfo;
+  static const platformChannelId = "banson.cloud/info";
+  static const platform = const MethodChannel(platformChannelId);
 
   Future<String> _getDuration() async {
-    String videoDuration = await MyApp.platform.invokeMethod('getDuration');
+    String videoDuration = await platform.invokeMethod('getDuration');
     return videoDuration;
   }
 
   Future<String> _getName() async {
-    String videoName = await MyApp.platform.invokeMethod('getName');
+    String videoName = await platform.invokeMethod('getName');
     return videoName;
   }
 
   Future<void> inflateData() async {
     try {
-      String duration = await _getDuration();
-      String name = await _getName();
+      String name =
+          await MethodChannel(platformChannelId).invokeMethod('getName');
+      String duration =
+          await MethodChannel(platformChannelId).invokeMethod('getDuration');
       _videoInfo = VideoInfo(name, duration);
       notifyListeners();
     } catch (e) {
